@@ -14,27 +14,27 @@ import lombok.Setter;
 public class TppProductRegister {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name="product_id")
-    Long productId;
+    private Long productId;
 
     @Column(name="type", nullable = false)
     @Size(max=100)
-    String type;
+    private String type;
 
     @Column(name="account")
-    Long account;
+    private Long account;
 
     @Size(max=30)
     @Column(name="currency_code")
-    String currencyCode;
+    private String currencyCode;
 
     @Size(max=50)
     @Column(name="state")
-    String state;
+    private String state;
 
     @Size(max=25)
     @Column(name="account_number")
-    String accountNumber;
+    private String accountNumber;
 }

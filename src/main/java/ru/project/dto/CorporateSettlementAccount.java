@@ -1,20 +1,18 @@
 package ru.project.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 public class CorporateSettlementAccount {
-    long instanceId;
-    String registryTypeCode;
-    String accountType;
-    String currencyCode;
-    String branchCode;
-    String priorityCode;
-    String mdmCode;
-    String clientCode;
-    String trainRegion;
-    String counter;
-    String salesCode;
+    private long instanceId;
+    private String registryTypeCode;
+    private String accountType;
+    private String currencyCode;
+    private String branchCode;
+    private String priorityCode;
+    private String mdmCode;
+    private String clientCode;
+    private String trainRegion;
+    private String counter;
+    private String salesCode;
 }

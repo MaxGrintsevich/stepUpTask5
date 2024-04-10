@@ -1,17 +1,15 @@
 package ru.project.dto;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 public class ProductResponse {
-    String instanceId;
-    List<Long> registerId = new ArrayList<>();
-    List<Long> supplementaryAgreementId = new ArrayList<>();
+    private String instanceId;
+    private List<Long> registerId = new ArrayList<>();
+    private List<Long> supplementaryAgreementId = new ArrayList<>();
 }

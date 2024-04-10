@@ -12,24 +12,24 @@ import lombok.Setter;
 public class AccountPool {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @Size(max=50)
     @Column(name="branch_code")
-    String branchCode;
+    private String branchCode;
 
     @Size(max=30)
     @Column(name="currency_code")
-    String currencyCode;
+    private String currencyCode;
 
     @Size(max=50)
     @Column(name="mdm_code")
-    String mdmCode;
+    private String mdmCode;
 
     @Size(max=30)
     @Column(name="priority_code")
-    String priorityCode;
+    private String priorityCode;
 
     @Size(max=50)
     @Column(name="registry_type_code")
-    String registryTypeCode;
+    private String registryTypeCode;
 }

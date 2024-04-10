@@ -1,12 +1,10 @@
 package ru.project.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 public class RegisterResponse {
-    String accountId;
+    private String accountId;
 }

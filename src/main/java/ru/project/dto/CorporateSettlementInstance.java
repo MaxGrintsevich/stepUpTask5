@@ -3,79 +3,49 @@ package ru.project.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 public class CorporateSettlementInstance {
 
-    Long instanceId;
+    private Long instanceId;
     @NotBlank
-    String productType;
+    private String productType;
     @NotBlank
-    String productCode;
+    private String productCode;
     @NotBlank
-    String registerType;
+    private String registerType;
     @NotBlank
     @Size(max=50)
-    String mdmCode;
+    private String mdmCode;
     @NotBlank
-    String contractNumber;
+    private String contractNumber;
     @NotNull
-    Date contractDate;
+    private Date contractDate;
     @NotBlank
-    String priority;
-    BigDecimal interestRatePenalty;
-    BigDecimal minimalBalance;
-    BigDecimal thresholdAmount;
-    String accountingDetails;
-    String rateType;
-    BigDecimal taxPercentageRate;
-    BigDecimal technicalOverdraftLimitAmount;
+    private String priority;
+    private BigDecimal interestRatePenalty;
+    private BigDecimal minimalBalance;
+    private BigDecimal thresholdAmount;
+    private String accountingDetails;
+    private String rateType;
+    private BigDecimal taxPercentageRate;
+    private BigDecimal technicalOverdraftLimitAmount;
     @NotNull
-    Long contractId;
+    private Long contractId;
     @NotBlank
-    String branchCode;
+    private String branchCode;
     @NotBlank
-    String isoCurrencyCode;
+    private String isoCurrencyCode;
     @NotBlank
-    String urgencyCode;
+    private String urgencyCode;
     @NotNull
-    Integer referenceCode;
-    List<AdditionalProperty> additionalPropertiesVip;
-    List<AgreementDTO> instanceArrangement;
+    private Integer referenceCode;
+    private List<AdditionalProperty> additionalPropertiesVip;
+    private List<AgreementDTO> instanceArrangement;
 
-    @Override
-    public String toString() {
-        return "{" +
-                "instanceId=" + instanceId +
-                ", productType='" + productType + '\'' +
-                ", productCode='" + productCode + '\'' +
-                ", registerType='" + registerType + '\'' +
-                ", mdmCode='" + mdmCode + '\'' +
-                ", contractNumber='" + contractNumber + '\'' +
-                ", contractDate=" + contractDate +
-                ", priority=" + priority +
-                ", interestRatePenalty=" + interestRatePenalty +
-                ", minimalBalance=" + minimalBalance +
-                ", thresholdAmount=" + thresholdAmount +
-                ", accountingDetails='" + accountingDetails + '\'' +
-                ", rateType='" + rateType + '\'' +
-                ", taxPercentageRate=" + taxPercentageRate +
-                ", technicalOverdraftLimitAmount=" + technicalOverdraftLimitAmount +
-                ", contractId=" + contractId +
-                ", branchCode='" + branchCode + '\'' +
-                ", isoCurrencyCode='" + isoCurrencyCode + '\'' +
-                ", urgencyCode='" + urgencyCode + '\'' +
-                ", referenceCode=" + referenceCode +
-                ", additionalPropertiesVip=" + additionalPropertiesVip +
-                ", instanceArrangement=" + instanceArrangement +
-                '}';
-    }
 }

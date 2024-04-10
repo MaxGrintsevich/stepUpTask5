@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import ru.project.model.Account;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AccountRepo extends CrudRepository<Account, Long> {
     @Query(value="select a.* from account a where account_pool_id=:poolId and bussy=false  order by id limit 10", nativeQuery = true)
@@ -14,7 +15,7 @@ public interface AccountRepo extends CrudRepository<Account, Long> {
     List<Account> findNextPageFreeAcc(Long poolId, Long lastId);
 
     @Query(value="select a.* from account a where id=:accountId for update nowait", nativeQuery = true)
-    Account findByIdLock(Long accountId);
+    Optional<Account> findByIdLock(Long accountId);
 
 
 

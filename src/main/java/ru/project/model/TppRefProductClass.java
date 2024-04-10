@@ -17,35 +17,35 @@ public class TppRefProductClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="internal_id")
-    Long internalId;
+    private Long internalId;
 
     @Column(unique = true)
     @NotBlank
     @Size(max=100)
-    String value;
+    private String value;
 
     @Size(max=50)
     @Column(name="gbi_code")
-    String gbiCode;
+    private String gbiCode;
 
     @Size(max=100)
     @Column(name="gbi_name")
-    String gbiName;
+    private String gbiName;
 
     @Size(max=50)
     @Column(name="")
-    String productRowCode;
+    private String productRowCode;
 
     @Size(max=100)
     @Column(name="")
-    String productRowName;
+    private String productRowName;
 
     @Size(max=50)
     @Column(name="")
-    String subclassCode;
+    private String subclassCode;
 
     @Size(max=100)
     @Column(name="subclass_name")
-    String subclassName;
+    private String subclassName;
 
 }

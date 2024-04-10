@@ -1,14 +1,12 @@
 package ru.project.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 public class AdditionalProperty {
-    String key;
-    String value;
-    String name;
+    private String key;
+    private String value;
+    private String name;
 
     @Override
     public String toString() {

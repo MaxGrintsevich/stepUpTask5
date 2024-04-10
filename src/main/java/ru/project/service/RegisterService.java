@@ -12,22 +12,28 @@ import ru.project.repo.TppProductRegisterRepo;
 import ru.project.repo.TppRefProductRegisterTypeRepo;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RegisterService {
-    @Autowired
-    TppRefProductRegisterTypeRepo registerTypeRepo;
-    @Autowired
-    TppProductRegisterRepo registerRepo;
 
-    @Autowired
-    AccountPoolService accountPoolService;
+    private final TppRefProductRegisterTypeRepo registerTypeRepo;
+    private final TppProductRegisterRepo registerRepo;
+    private final AccountPoolService accountPoolService;
+    private final ProductRegisterMapper registerMapper;
+    private final CSAccountMapper csaAccountMapper;
 
-    @Autowired
-    ProductRegisterMapper registerMapper;
-
-    @Autowired
-    CSAccountMapper csaAccountMapper;
+    public RegisterService( @Autowired TppRefProductRegisterTypeRepo registerTypeRepo
+                            ,@Autowired TppProductRegisterRepo registerRepo
+                            ,@Autowired AccountPoolService accountPoolService
+                            ,@Autowired ProductRegisterMapper registerMapper
+                            ,@Autowired CSAccountMapper csaAccountMapper) {
+        this.registerTypeRepo = registerTypeRepo;
+        this.registerRepo = registerRepo;
+        this.accountPoolService = accountPoolService;
+        this.registerMapper = registerMapper;
+        this.csaAccountMapper = csaAccountMapper;
+    }
 
     public List<Long> getProductRegisterIds(CorporateSettlementInstance csi){
         return registerRepo.getRegisterIdsByProduct(csi.getInstanceId());
@@ -52,12 +58,12 @@ public class RegisterService {
     }
 
     private void registerNotExistsOrThrown(CorporateSettlementAccount csa){
-        TppProductRegister register = registerRepo.findFirstByProductIdAndType(csa.getInstanceId(), csa.getAccountType());
-        if (register == null) return;
+        Optional<TppProductRegister> register = registerRepo.findFirstByProductIdAndType(csa.getInstanceId(), csa.getAccountType());
+        if (register.isEmpty()) return;
         throw new BadFieldValueException("Параметр registryTypeCode тип регистра '"
                                         + csa.getAccountType()
                                         + "' уже существует для ЭП с ИД  '"
-                                        + register.getId() + "'.");
+                                        + register.get().getId() + "'.");
     }
 
     @Transactional(rollbackFor = {Exception.class})

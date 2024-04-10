@@ -9,16 +9,23 @@ import ru.project.repo.AccountPoolRepo;
 import ru.project.repo.AccountRepo;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountPoolService {
-    @Autowired
-    AccountPoolRepo poolRepo;
-    @Autowired
-    AccountRepo accountRepo;
+
+    private final AccountPoolRepo poolRepo;
+    private final AccountRepo accountRepo;
+
+    public AccountPoolService(@Autowired AccountPoolRepo poolRepo, @Autowired AccountRepo accountRepo) {
+        this.poolRepo = poolRepo;
+        this.accountRepo = accountRepo;
+    }
+
     private AccountPool getPoolOrThrown(String branchCode, String currencyCode, String mdmCode, String priorityCode, String registryTypeCode){
-        AccountPool accountPool = poolRepo.findPool(branchCode,currencyCode,mdmCode,priorityCode,registryTypeCode);
-        if (accountPool == null){
+
+        Optional<AccountPool> accountPool = poolRepo.findPool(branchCode,currencyCode,mdmCode,priorityCode,registryTypeCode);
+        if (accountPool.isEmpty()){
             throw new NoDataFoundException("Не найден пул [account_pool]: "
                     + "branchCode='" + branchCode + "'; "
                     + "currencyCode='" + currencyCode + "'; "
@@ -26,13 +33,13 @@ public class AccountPoolService {
                     + "priorityCode='" + priorityCode + "'; "
                     + "registryTypeCode='" + registryTypeCode + "' ");
         }
-        return accountPool;
+        return accountPool.get();
     }
 
     private Account getAccountWithLock(List<Account> accounts){
         for (Account account: accounts) {
-            Account acc = accountRepo.findByIdLock(account.getId());
-            if (! acc.getBusy()) return acc;
+            Optional<Account> lockedAccount = accountRepo.findByIdLock(account.getId());
+            if (lockedAccount.filter(acc->!acc.getBusy()).isPresent()) return lockedAccount.get();
         }
         return null;
     }
@@ -42,7 +49,7 @@ public class AccountPoolService {
         Account acc = null;
         while (! accounts.isEmpty()){
             acc = getAccountWithLock(accounts);
-            if (! acc.getBusy()) return acc;
+            if (acc != null) return acc;
             accounts = accountRepo.findNextPageFreeAcc(pool.getId(), accounts.get(accounts.size()-1).getId());
         }
 

@@ -2,9 +2,11 @@ package ru.project.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Builder
 @Entity
 @Table(name="account")
 @Setter
@@ -12,15 +14,15 @@ import lombok.Setter;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name="account_pool_id")
-    Long accountPoolId;
+    private Long accountPoolId;
 
     @Size(max=25)
     @Column(name="account_number")
-    String accountNumber;
+    private String accountNumber;
 
     @Column(name="bussy")
-    Boolean busy;
+    private Boolean busy;
 }

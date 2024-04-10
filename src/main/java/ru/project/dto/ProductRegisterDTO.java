@@ -1,18 +1,16 @@
 package ru.project.dto;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Builder
-@Getter
-@Setter
+@Data
 public class ProductRegisterDTO {
-    Long productId;
-    String branchCode;
-    String currencyCode;
-    String mdmCode;
-    String priorityCode;
-    String type;
+    private Long productId;
+    private String branchCode;
+    private String currencyCode;
+    private String mdmCode;
+    private String priorityCode;
+    private String type;
 
 }

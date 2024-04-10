@@ -14,10 +14,13 @@ import java.util.List;
 @Service
 public class AgreementService {
 
-    @Autowired
-    AgreementRepo agreementRepo;
-    @Autowired
-    AgreementMapper agreementMapper;
+    private final AgreementRepo agreementRepo;
+    private final AgreementMapper agreementMapper;
+
+    public AgreementService(@Autowired AgreementRepo agreementRepo, @Autowired AgreementMapper agreementMapper) {
+        this.agreementRepo = agreementRepo;
+        this.agreementMapper = agreementMapper;
+    }
 
     public void checkAgreementNotExistsOrThrow(String number){
         List<Agreement> egreementList = agreementRepo.findByNumber(number);

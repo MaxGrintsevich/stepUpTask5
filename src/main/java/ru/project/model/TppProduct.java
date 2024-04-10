@@ -21,55 +21,55 @@ public class TppProduct {
     Long id;
 
     @Column(name="product_code_id")
-    Long productCodeId;
+    private Long productCodeId;
 
     @Column(name="client_id")
-    String clientId;
+    private String clientId;
 
     @Column(name="type")
-    String type;
+    private String type;
 
     @Column(name="number")
-    String number;
+    private String number;
 
     @Column(name="priority")
-    String priority;
+    private String priority;
 
     @Column(name="date_of_conclusion")
-    Date dateOfConclusion;
+    private Date dateOfConclusion;
 
     @Column(name="start_date_time")
-    Date startDateTime;
+    private Date startDateTime;
 
     @Column(name="end_date_time")
-    Date endDateTime;
+    private Date endDateTime;
 
     @Column(name="days")
-    Long days;
+    private Long days;
 
     @Column(name="penalty_rate")
-    BigDecimal penaltyRate;
+    private BigDecimal penaltyRate;
 
     @Column(name="nso")
-    BigDecimal nso;
+    private BigDecimal nso;
 
     @Column(name="threshold_amount")
-    BigDecimal thresholdAmount;
+    private BigDecimal thresholdAmount;
 
     @Column(name="requisite_type")
-    String requisiteType;
+    private String requisiteType;
 
     @Column(name="interest_rate_type")
-    String interestRateType;
+    private String interestRateType;
 
     @Column(name="tax_rate")
-    BigDecimal taxRate;
+    private BigDecimal taxRate;
 
     @Column(name="reasone_close")
-    String reasonClose;
+    private String reasonClose;
 
     @Column(name="state")
-    String state;
+    private String state;
 
     /*@Column(name="branch_code")
     @Size(max=50)

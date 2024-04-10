@@ -17,18 +17,30 @@ import ru.project.repo.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @Getter
-@Setter(onMethod = @__(@Autowired))
+@Setter
 
 public class ProductService {
-    private TppProductRepo productRepo;
-    private TppRefProductClassRepo productClassRepo;
-    private AgreementService agreementService;
-    private RegisterService registerService;
-    private InstanceMapper instanceMapper;
+    private final TppProductRepo productRepo;
+    private final TppRefProductClassRepo productClassRepo;
+    private final AgreementService agreementService;
+    private final RegisterService registerService;
+    private final InstanceMapper instanceMapper;
 
+    public ProductService(@Autowired TppProductRepo productRepo
+                            ,@Autowired TppRefProductClassRepo productClassRepo
+                            ,@Autowired AgreementService agreementService
+                            ,@Autowired RegisterService registerService
+                            ,@Autowired InstanceMapper instanceMapper) {
+        this.productRepo = productRepo;
+        this.productClassRepo = productClassRepo;
+        this.agreementService = agreementService;
+        this.registerService = registerService;
+        this.instanceMapper = instanceMapper;
+    }
 
     private void checkProductNotExistsOrThrow(String contructNumber){
         List<TppProduct> productList = productRepo.findByNumber(contructNumber);
@@ -42,9 +54,14 @@ public class ProductService {
     }
 
     private TppProduct getProductEntity(CorporateSettlementInstance csi){
-        TppRefProductClass productClass = productClassRepo.findByValue(csi.getProductCode());
+        Optional<TppRefProductClass> productClass = productClassRepo.findByValue(csi.getProductCode());
+
+        if (productClass.isEmpty()) {
+            throw new NoDataFoundException("Не найдена запись [tpp_ref_product_class_repo] с полем value = "+csi.getProductCode());
+        }
+
         TppProduct productEntity = instanceMapper.map(csi);
-        productEntity.setProductCodeId(productClass.getInternalId());
+        productEntity.setProductCodeId(productClass.get().getInternalId());
 
         productRepo.save(productEntity);
 

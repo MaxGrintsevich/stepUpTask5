@@ -11,6 +11,7 @@ import ru.project.dto.CorporateSettlementInstance;
 import ru.project.dto.ProductRegisterDTO;
 import ru.project.exceptions.BadFieldValueException;
 import ru.project.mapper.InstanceMapper;
+import ru.project.model.Account;
 import ru.project.model.TppProduct;
 import ru.project.model.TppRefProductClass;
 import ru.project.model.TppRefProductRegisterType;
@@ -22,6 +23,7 @@ import ru.project.service.RegisterService;
 
 import java.util.*;
 
+import static java.util.Optional.ofNullable;
 import static org.mockito.Mockito.*;
 
 public class TestProductService {
@@ -44,7 +46,6 @@ public class TestProductService {
     @BeforeAll
     static void beforeAll(){
         System.out.println(">>>>>>>>>>>>> BeforeAll");
-        productService = new ProductService();
 
     }
 
@@ -56,11 +57,8 @@ public class TestProductService {
         RegisterService registerService =  mock(RegisterService.class);;
         InstanceMapper instanceMapper =  mock(InstanceMapper.class);;
 
-        productService.setProductRepo(productRepo);
-        productService.setProductClassRepo(productClassRepo);
-        productService.setAgreementService(agreementService);
-        productService.setRegisterService(registerService);
-        productService.setInstanceMapper(instanceMapper);
+        productService = new ProductService(productRepo, productClassRepo, agreementService, registerService, instanceMapper);
+
         csi = getCSI();
     }
 
@@ -95,7 +93,7 @@ public class TestProductService {
         when(productService.getRegisterService().getRegisterTypeListOrThrow("productCode", "Клиентский")).thenReturn(registerTypeList);
         when(productService.getInstanceMapper().registerMap(csi)).thenReturn(registerDTO1).thenReturn(registerDTO2);
         when(productService.getInstanceMapper().map(csi)).thenReturn(productEntity);
-        when(productService.getProductClassRepo().findByValue("productCode")).thenReturn(productClassEntity);
+        when(productService.getProductClassRepo().findByValue("productCode")).thenReturn(ofNullable(productClassEntity));
         doAnswer(invocation->{AgreementDTO x= invocation.getArgument(0);
                                x.setProductId(csi.getInstanceId());
                                 return null;}
@@ -105,6 +103,16 @@ public class TestProductService {
         Assertions.assertEquals("registerType1", registerDTO1.getType());
         Assertions.assertEquals("registerType2", registerDTO2.getType());
         csi.getInstanceArrangement().forEach(agreementDTO -> Assertions.assertEquals(csi.getInstanceId(), agreementDTO.getProductId()));
+
+    }
+
+    @Test
+    void testOptionsl(){
+        Optional<Account> opt = ofNullable(null);
+
+        if (opt.filter(acc -> !acc.getBusy()).isPresent())
+            System.out.println("can use");
+        else System.out.println("cant use");
 
     }
 

@@ -18,72 +18,72 @@ import java.util.Date;
 public class Agreement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name="product_id")
-    Long productId;
+    private Long productId;
 
     @Column(name="general_agreement_id")
-    String generalAgreementId;
+    private String generalAgreementId;
 
     @Column(name="supplementary_agreement_id")
-    String supplementaryAgreementId;
+    private String supplementaryAgreementId;
 
     @Column(name="arrangement_type")
-    String arrangementType;
+    private String arrangementType;
 
     @Column(name="sheduler_job_id")
-    Long schedulerJobId;
+    private Long schedulerJobId;
 
     @Column(name="number")
-    String number;
+    private String number;
 
     @Column(name="opening_date")
-    Date openingDate;
+    private Date openingDate;
 
     @Column(name="closing_date")
-    Date closingDate;
+    private Date closingDate;
 
     @Column(name="cancel_date")
-    Date cancelDate;
+    private Date cancelDate;
 
     @Column(name="validity_duration")
-    Long validityDuration;
+    private Long validityDuration;
 
     @Column(name="cancellation_reason")
-    String cancellationReason;
+    private String cancellationReason;
 
     @Column(name="status")
-    String status;
+    private String status;
 
     @Column(name="interest_calculation_date")
-    Date interestCalculationDate;
+    private Date interestCalculationDate;
 
     @Column(name="interest_rate")
-    BigDecimal interestRate;
+    private BigDecimal interestRate;
 
     @Column(name="coefficient")
-    BigDecimal coefficient;
+    private BigDecimal coefficient;
 
     @Column(name="coefficient_action")
-    String coefficientAction;
+    private String coefficientAction;
 
     @Column(name="minimum_interest_rate")
-    BigDecimal minimumInterestRate;
+    private BigDecimal minimumInterestRate;
 
     @Column(name="minimum_interest_rate_coefficient")
-    BigDecimal minimumInterestRateCoefficient;
+    private BigDecimal minimumInterestRateCoefficient;
 
     @Column(name="minimum_interest_rate_coefficient_action")
-    String minimumInterestRateCoefficientAction;
+    private String minimumInterestRateCoefficientAction;
 
     @Column(name="maximal_interest_rate")
-    BigDecimal maximalInterestRate;
+    private BigDecimal maximalInterestRate;
 
     @Column(name="maximal_interest_rate_coefficient")
-    BigDecimal maximalInterestRateCoefficient;
+    private BigDecimal maximalInterestRateCoefficient;
 
     @Column(name="maximal_interest_rate_coefficient_action")
-    String maximalInterestRateCoefficientAction;
+    private String maximalInterestRateCoefficientAction;
 
 }

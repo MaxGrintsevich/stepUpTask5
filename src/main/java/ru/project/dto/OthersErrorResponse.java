@@ -1,15 +1,13 @@
 package ru.project.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 public class OthersErrorResponse {
-    int status;
-    String error;
-    String stack;
+    private int status;
+    private String error;
+    private String stack;
 
 }
